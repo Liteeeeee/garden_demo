@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:animations/animations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   final List<Widget> _widgetOptions = <Widget>[
     const GardenPage(),
@@ -60,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_titleOptions[_selectedIndex])),
+      appBar: AppBar(title: Text(_titleOptions[_selectedIndex],style: const TextStyle(color: Colors.white,fontWeight:FontWeight.bold )),centerTitle: true,backgroundColor: const Color(0xFF9C928E),),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -74,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.android), label: 'AI助手'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
@@ -100,7 +99,7 @@ class GardenPage extends StatelessWidget {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    'https://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
+                    'http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -112,7 +111,7 @@ class GardenPage extends StatelessWidget {
             child: Align( // 使用 Align 组件
               alignment: Alignment.bottomCenter, // 将 Column 放在底部
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 10), // 增加底部内边距
+                padding: const EdgeInsets.only(bottom: 2), // 增加底部内边距
                 child: Column(
                   mainAxisSize: MainAxisSize.min, // 让 Column 的大小适应其内容
                   children: [
@@ -192,7 +191,7 @@ class ConfirmPage extends StatelessWidget {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    'https://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
+                    'http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -344,48 +343,48 @@ class SearchPage extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 20.0), // 距离底部20
-            child: ElevatedButton(
-              onPressed: () async {
-                // 按钮点击事件
-                final picker = ImagePicker();
-                final pickedFile = await picker.pickImage(
-                  source: ImageSource.camera,
-                );
+              padding: const EdgeInsets.only(bottom: 42.0), // 距离底部20
+              child: SizedBox(width:220,child: ElevatedButton(
+                onPressed: () async {
+                  // 按钮点击事件
+                  final picker = ImagePicker();
+                  final pickedFile = await picker.pickImage(
+                    source: ImageSource.camera,
+                  );
 
-                if (pickedFile != null) {
-                  //TODO
-                  print('Image picked: ${pickedFile.path}');
-                } else {
-                  print('No image selected.');
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 0, // 缩小水平方向的padding
-                  vertical: 15,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                backgroundColor: Colors.green,
-              ),
-              child: const Row( // 使用 Row
-                mainAxisAlignment: MainAxisAlignment.center, // 使子项居中
-                children: [
-                  Icon(
-                    Icons.camera_alt,
-                    size: 30,
-                    color: Colors.white,
+                  if (pickedFile != null) {
+                    //TODO
+                    print('Image picked: ${pickedFile.path}');
+                  } else {
+                    print('No image selected.');
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 0, // 缩小水平方向的padding
+                    vertical: 15,
                   ),
-                  SizedBox(width: 8), // 间距
-                  Text(
-                    '快照',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                ],
-              ),
-            ),
+                  backgroundColor: Colors.green,
+                ),
+                child: const Row( // 使用 Row
+                  mainAxisAlignment: MainAxisAlignment.center, // 使子项居中
+                  children: [
+                    Icon(
+                      Icons.camera_alt,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 8), // 间距
+                    Text(
+                      '快照',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),)
           ),
         ),
       ],
@@ -410,7 +409,7 @@ class DiagnosisPage extends StatelessWidget {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                    'https://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
+                    'http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -454,3 +453,4 @@ class DiagnosisPage extends StatelessWidget {
     );
   }
 }
+
