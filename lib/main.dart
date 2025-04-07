@@ -59,7 +59,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_titleOptions[_selectedIndex],style: const TextStyle(color: Colors.white,fontWeight:FontWeight.bold )),centerTitle: true,backgroundColor: const Color(0xFF9C928E),),
+      appBar: AppBar(
+        title: Text(
+          _titleOptions[_selectedIndex],
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF9C928E),
+      ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -93,22 +103,23 @@ class GardenPage extends StatelessWidget {
         children: <Widget>[
           // 上半部分：图片
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
-                  ),
+                  // 使用本地资源图片
+                  image: AssetImage('lib/assets/demoNeed.webp'),
                   fit: BoxFit.cover,
                 ),
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(200),bottomRight: Radius.circular(200) ),
               ),
             ),
           ),
           Expanded(
             flex: 1,
-            child: Align( // 使用 Align 组件
+            child: Align(
+              // 使用 Align 组件
               alignment: Alignment.bottomCenter, // 将 Column 放在底部
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 2), // 增加底部内边距
@@ -190,9 +201,8 @@ class ConfirmPage extends StatelessWidget {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
-                  ),
+                  // 使用本地资源图片
+                  image: AssetImage('lib/assets/demoNeed.webp'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -327,7 +337,7 @@ class SearchPage extends StatelessWidget {
                     itemCount: 20, // 假设有20个搜索结果
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text('搜索结果 ${index + 1}'),
+                        title: Text('植物 ${index + 1}'),
                         onTap: () {
                           // 处理列表项点击事件
                         },
@@ -343,8 +353,10 @@ class SearchPage extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-              padding: const EdgeInsets.only(bottom: 42.0), // 距离底部20
-              child: SizedBox(width:220,child: ElevatedButton(
+            padding: const EdgeInsets.only(bottom: 42.0), // 距离底部20
+            child: SizedBox(
+              width: 220,
+              child: ElevatedButton(
                 onPressed: () async {
                   // 按钮点击事件
                   final picker = ImagePicker();
@@ -369,14 +381,11 @@ class SearchPage extends StatelessWidget {
                   ),
                   backgroundColor: Colors.green,
                 ),
-                child: const Row( // 使用 Row
+                child: const Row(
+                  // 使用 Row
                   mainAxisAlignment: MainAxisAlignment.center, // 使子项居中
                   children: [
-                    Icon(
-                      Icons.camera_alt,
-                      size: 30,
-                      color: Colors.white,
-                    ),
+                    Icon(Icons.camera_alt, size: 30, color: Colors.white),
                     SizedBox(width: 8), // 间距
                     Text(
                       '快照',
@@ -384,7 +393,8 @@ class SearchPage extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),)
+              ),
+            ),
           ),
         ),
       ],
@@ -408,9 +418,8 @@ class DiagnosisPage extends StatelessWidget {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'http://miaobi-lite.bj.bcebos.com/miaobi/5mao/b%275a2U6ZuA56u56IqL5oCO5LmI5YW7XzE3MjkxMjk3NjIuOTM5MTIyNw%3D%3D%27/0.png',
-                  ),
+                  // 使用本地资源图片
+                  image: AssetImage('lib/assets/demoNeed.webp'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -453,4 +462,3 @@ class DiagnosisPage extends StatelessWidget {
     );
   }
 }
-
